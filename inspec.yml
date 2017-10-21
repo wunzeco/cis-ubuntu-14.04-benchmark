@@ -1,0 +1,8 @@
+name: cis-ubuntu-14.04-benchmark
+title:  CIS Ubuntu Linux 14.04 LTS Benchmark Profile
+maintainer: Ogonna Iwunze
+copyright: none
+copyright_email: none
+license: Apache-2.0
+summary: An InSpec Compliance Profile for CIS Ubuntu Linux 14.04 LTS Benchmark
+version: 0.1.0
