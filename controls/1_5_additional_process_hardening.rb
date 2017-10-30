@@ -10,7 +10,7 @@ control 'cis-ubuntu-14.04-1.5.1' do
 
   tag cis: 'ubuntu-14.04:1.5.1'
 
-  limits_d_files = Dir.glob('/etc/security/limits.d/*.conf').join(' ')
+  limits_d_files = command('ls /etc/security/limits.d/*.conf').stdout
   describe command("grep 'hard core' /etc/security/limits.conf #{limits_d_files}") do
     its(:stdout) { should match '* hard core 0' }
   end

@@ -10,11 +10,11 @@ control 'cis-ubuntu-14.04-2.1.1' do
 
   tag cis: 'ubuntu-14.04:2.1.1'
 
-  inetd_d_files = Dir.glob('/etc/inetd.d/*')
+  inetd_d_files = command('ls /etc/inetd.d/*').stdout
   describe inetd_conf do
     its('chargen') { should eq nil }
   end
-  inetd_d_files.each do |f|
+  inetd_d_files.split().each do |f|
     describe inetd_conf(f) do
       its('chargen') { should eq nil }
     end
@@ -31,11 +31,11 @@ control 'cis-ubuntu-14.04-2.1.2' do
 
   tag cis: 'ubuntu-14.04:2.1.2'
 
-  inetd_d_files = Dir.glob('/etc/inetd.d/*')
+  inetd_d_files = command('ls /etc/inetd.d/*').stdout
   describe inetd_conf do
     its('daytime') { should eq nil }
   end
-  inetd_d_files.each do |f|
+  inetd_d_files.split().each do |f|
     describe inetd_conf(f) do
       its('daytime') { should eq nil }
     end
@@ -52,11 +52,11 @@ control 'cis-ubuntu-14.04-2.1.3' do
 
   tag cis: 'ubuntu-14.04:2.1.3'
 
-  inetd_d_files = Dir.glob('/etc/inetd.d/*')
+  inetd_d_files = command('ls /etc/inetd.d/*').stdout
   describe inetd_conf do
     its('discard') { should eq nil }
   end
-  inetd_d_files.each do |f|
+  inetd_d_files.split().each do |f|
     describe inetd_conf(f) do
       its('discard') { should eq nil }
     end
@@ -73,11 +73,11 @@ control 'cis-ubuntu-14.04-2.1.4' do
 
   tag cis: 'ubuntu-14.04:2.1.4'
 
-  inetd_d_files = Dir.glob('/etc/inetd.d/*')
+  inetd_d_files = command('ls /etc/inetd.d/*').stdout
   describe inetd_conf do
     its('echo') { should eq nil }
   end
-  inetd_d_files.each do |f|
+  inetd_d_files.split().each do |f|
     describe inetd_conf(f) do
       its('echo') { should eq nil }
     end
@@ -94,11 +94,11 @@ control 'cis-ubuntu-14.04-2.1.5' do
 
   tag cis: 'ubuntu-14.04:2.1.5'
 
-  inetd_d_files = Dir.glob('/etc/inetd.d/*')
+  inetd_d_files = command('ls /etc/inetd.d/*').stdout
   describe inetd_conf do
     its('time') { should eq nil }
   end
-  inetd_d_files.each do |f|
+  inetd_d_files.split().each do |f|
     describe inetd_conf(f) do
       its('time') { should eq nil }
     end
@@ -115,13 +115,13 @@ control 'cis-ubuntu-14.04-2.1.6' do
 
   tag cis: 'ubuntu-14.04:2.1.6'
 
-  inetd_d_files = Dir.glob('/etc/inetd.d/*')
+  inetd_d_files = command('ls /etc/inetd.d/*').stdout
   describe inetd_conf do
     its('shell') { should eq nil }
     its('login') { should eq nil }
     its('exec') { should eq nil }
   end
-  inetd_d_files.each do |f|
+  inetd_d_files.split().each do |f|
     describe inetd_conf(f) do
       its('shell') { should eq nil }
       its('login') { should eq nil }
@@ -140,12 +140,12 @@ control 'cis-ubuntu-14.04-2.1.7' do
 
   tag cis: 'ubuntu-14.04:2.1.7'
 
-  inetd_d_files = Dir.glob('/etc/inetd.d/*')
+  inetd_d_files = command('ls /etc/inetd.d/*').stdout
   describe inetd_conf do
     its('talk') { should eq nil }
     its('ntalk') { should eq nil }
   end
-  inetd_d_files.each do |f|
+  inetd_d_files.split().each do |f|
     describe inetd_conf(f) do
       its('talk') { should eq nil }
       its('ntalk') { should eq nil }
@@ -163,11 +163,11 @@ control 'cis-ubuntu-14.04-2.1.8' do
 
   tag cis: 'ubuntu-14.04:2.1.8'
 
-  inetd_d_files = Dir.glob('/etc/inetd.d/*')
+  inetd_d_files = command('ls /etc/inetd.d/*').stdout
   describe inetd_conf do
     its('telnet') { should eq nil }
   end
-  inetd_d_files.each do |f|
+  inetd_d_files.split().each do |f|
     describe inetd_conf(f) do
       its('telnet') { should eq nil }
     end
@@ -184,11 +184,11 @@ control 'cis-ubuntu-14.04-2.1.9' do
 
   tag cis: 'ubuntu-14.04:2.1.9'
 
-  inetd_d_files = Dir.glob('/etc/inetd.d/*')
+  inetd_d_files = command('ls /etc/inetd.d/*').stdout
   describe inetd_conf do
     its('tftp') { should eq nil }
   end
-  inetd_d_files.each do |f|
+  inetd_d_files.split().each do |f|
     describe inetd_conf(f) do
       its('tftp') { should eq nil }
     end
