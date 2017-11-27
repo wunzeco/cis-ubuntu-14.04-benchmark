@@ -138,12 +138,10 @@ control 'cis-ubuntu-14.04-2.2.6' do
 
   tag cis: 'ubuntu-14.04:2.2.7'
 
-  init_script_links = command('ls /etc/rc*.d/S*slapd').stdout
-
-  init_script_links.split().each do |l|
-    describe file(l) do
-      it { should_not exist }
-    end
+  describe service('slapd') do
+    it { should_not be_installed }
+    it { should_not be_enabled }
+    it { should_not be_running }
   end
 end
 
@@ -154,12 +152,10 @@ control 'cis-ubuntu-14.04-2.2.7' do
 
   tag cis: 'ubuntu-14.04:2.2.7'
 
-  init_script_links = command('ls /etc/rc*.d/S*nfs-kernel-server').stdout
-
-  init_script_links.split().each do |l|
-    describe file(l) do
-      it { should_not exist }
-    end
+  describe service('nfs-kernel-server') do
+    it { should_not be_installed }
+    it { should_not be_enabled }
+    it { should_not be_running }
   end
   describe command('initctl show-config rpcbind') do
     its(:stdout) { should_not match 'start on' }
@@ -173,12 +169,10 @@ control 'cis-ubuntu-14.04-2.2.8' do
 
   tag cis: 'ubuntu-14.04:2.2.8'
 
-  init_script_links = command('ls /etc/rc*.d/S*bind9').stdout
-
-  init_script_links.split().each do |l|
-    describe file(l) do
-      it { should_not exist }
-    end
+  describe service('bind9') do
+    it { should_not be_installed }
+    it { should_not be_enabled }
+    it { should_not be_running }
   end
 end
 
@@ -201,12 +195,10 @@ control 'cis-ubuntu-14.04-2.2.10' do
 
   tag cis: 'ubuntu-14.04:2.2.10'
 
-  init_script_links = command('ls /etc/rc*.d/S*apache2').stdout
-
-  init_script_links.split().each do |l|
-    describe file(l) do
-      it { should_not exist }
-    end
+  describe service('apache2') do
+    it { should_not be_installed }
+    it { should_not be_enabled }
+    it { should_not be_running }
   end
 end
 
@@ -253,12 +245,10 @@ control 'cis-ubuntu-14.04-2.2.14' do
 
   tag cis: 'ubuntu-14.04:2.2.14'
 
-  init_script_links = command('ls /etc/rc*.d/S*snmpd').stdout
-
-  init_script_links.split().each do |l|
-    describe file(l) do
-      it { should_not exist }
-    end
+  describe service('snmpd') do
+    it { should_not be_installed }
+    it { should_not be_enabled }
+    it { should_not be_running }
   end
 end
 

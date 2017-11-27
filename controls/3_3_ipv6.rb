@@ -45,6 +45,6 @@ control 'cis-ubuntu-14.04-3.3.3' do
   end
 
   describe file('/etc/default/grub') do
-    its(:content) { should match 'GRUB_CMDLINE_LINUX="ipv6.disable=1"' }
+    its(:content) { should match 'GRUB_CMDLINE_LINUX=".*ipv6.disable=1.*"' }
   end
 end

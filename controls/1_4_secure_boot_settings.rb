@@ -23,8 +23,8 @@ control 'cis-ubuntu-14.04-1.4.2' do
   tag cis: 'ubuntu-14.04:1.4.2'
 
   describe file('/boot/grub/grub.cfg') do
-    its('content') { should match /^set\ssuperusers/ }
-    its('content') { should match /^password/ }
+    its('content') { should match %r{^set\ssuperusers} }
+    its('content') { should match %r{^password} }
   end
 end
 
@@ -36,6 +36,6 @@ control 'cis-ubuntu-14.04-1.4.3' do
   tag cis: 'ubuntu-14.04:1.4.3'
 
   describe file('/etc/shadow') do
-    its('content') { should_not match /^root:[*\!]:/ }
+    its('content') { should_not match %r{^root:[*\!]:} }
   end
 end
