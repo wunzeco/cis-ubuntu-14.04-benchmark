@@ -22,3 +22,39 @@ control 'cis-ubuntu-14.04-5.3.1' do
     its('lcredit') { should cmp '-1' }
   end
 end
+
+control 'cis-ubuntu-14.04-5.3.2' do
+  impact  0.0
+  title   '5.3.2 Ensure lockout for failed password attempts is configured (Not Scored)'
+  desc    'Locking out user IDs after n unsuccessful consecutive login attempts mitigates brute force password attacks against your systems.'
+
+  tag cis: 'ubuntu-14.04:5.3.2'
+
+  describe file('/etc/pam.d/common-auth') do
+    its(:content) { should match %r{auth\s+required\s+pam_tally2.so\s+onerr=fail\s+audit\s+silent\s+deny=\d+\s+unlock_time=\d+} }
+  end
+end
+
+control 'cis-ubuntu-14.04-5.3.3' do
+  impact  1.0
+  title   '5.3.3 Ensure password reuse is limited (Scored)'
+  desc    "The /etc/security/opasswd file stores the users' old passwords and can be checked to ensure that users are not recycling recent passwords."
+
+  tag cis: 'ubuntu-14.04:5.3.3'
+
+  describe file('/etc/pam.d/common-password') do
+    its(:content) { should match %r{^password\s+sufficient\s+pam_unix.so} }
+  end
+end
+
+control 'cis-ubuntu-14.04-5.3.4' do
+  impact  1.0
+  title   '5.3.4 Ensure password hashing algorithm is SHA-512 (Scored)'
+  desc    'The SHA-512 algorithm provides much stronger hashing than MD5, thus providing additional protection to the system by increasing the level of effort for an attacker to successfully determine passwords.'
+
+  tag cis: 'ubuntu-14.04:5.3.4'
+
+  describe file('/etc/pam.d/common-password') do
+    its(:content) { should match %r{^password.*pam_unix.so.*sha513} }
+  end
+end
