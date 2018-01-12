@@ -203,3 +203,73 @@ control 'cis-ubuntu-14.04-6.2.15' do
     its(:stdout) { should eq '' }
   end
 end
+
+control 'cis-ubuntu-14.04-6.2.16' do
+  impact  1.0
+  title   '6.2.16 Ensure no duplicate UIDs exist (Scored)'
+  desc    'Although the useradd program will not let you create a duplicate User ID (UID), it is possible for an administrator to manually edit the /etc/passwd file and change the UID field. Users must be assigned unique UIDs for accountability and to ensure appropriate access protections.'
+
+  tag cis: 'ubuntu-14.04:6.2.16'
+
+  cmd = inspec.profile.file('duplicate_uids_audit.sh')
+  describe bash(cmd) do
+    its(:exit_status) { should cmp 0 }
+    its(:stdout) { should eq '' }
+  end
+end
+
+control 'cis-ubuntu-14.04-6.2.17' do
+  impact  1.0
+  title   '6.2.17 Ensure no duplicate GIDs exist (Scored)'
+  desc    'Although the groupadd program will not let you create a duplicate Group ID (GID), it is possible for an administrator to manually edit the /etc/group file and change the GID field. User groups must be assigned unique GIDs for accountability and to ensure appropriate access protections.'
+
+  tag cis: 'ubuntu-14.04:6.2.17'
+
+  cmd = inspec.profile.file('duplicate_gids_audit.sh')
+  describe bash(cmd) do
+    its(:exit_status) { should cmp 0 }
+    its(:stdout) { should eq '' }
+  end
+end
+
+control 'cis-ubuntu-14.04-6.2.18' do
+  impact  1.0
+  title   '6.2.18 Ensure no duplicate user names exist (Scored)'
+  desc    'Although the useradd program will not let you create a duplicate user name, it is possible for an administrator to manually edit the /etc/passwd file and change the user name. If a user is assigned a duplicate user name, it will create and have access to files with the first UID for that username in /etc/passwd.'
+
+  tag cis: 'ubuntu-14.04:6.2.18'
+
+  cmd = inspec.profile.file('duplicate_user_names_audit.sh')
+  describe bash(cmd) do
+    its(:exit_status) { should cmp 0 }
+    its(:stdout) { should eq '' }
+  end
+end
+
+control 'cis-ubuntu-14.04-6.2.19' do
+  impact  1.0
+  title   '6.2.19 Ensure no duplicate group names exist (Scored)'
+  desc    'Although the groupadd program will not let you create a duplicate group name, it is possible for an administrator to manually edit the /etc/group file and change the group name. If a group is assigned a duplicate group name, it will create and have access to files with the first GID for that group in /etc/group. Effectively, the GID is shared, which is a security problem.'
+
+  tag cis: 'ubuntu-14.04:6.2.19'
+
+  cmd = inspec.profile.file('duplicate_group_names_audit.sh')
+  describe bash(cmd) do
+    its(:exit_status) { should cmp 0 }
+    its(:stdout) { should eq '' }
+  end
+end
+
+control 'cis-ubuntu-14.04-6.2.20' do
+  impact  1.0
+  title   '6.2.20 Ensure shadow group is empty (Scored)'
+  desc    'The shadow group allows system programs which require access the ability to read the /etc/shadow file. No users should be assigned to the shadow group.'
+
+  tag cis: 'ubuntu-14.04:6.2.20'
+
+  cmd = inspec.profile.file('shadow_group_audit.sh')
+  describe bash(cmd) do
+    its(:exit_status) { should cmp 0 }
+    its(:stdout) { should eq '' }
+  end
+end
