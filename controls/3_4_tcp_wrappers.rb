@@ -23,7 +23,7 @@ control 'cis-ubuntu-14.04-3.4.2' do
   tag cis: 'ubuntu-14.04:3.4.2'
 
   describe file('/etc/hosts.allow') do
-    its(:content) { should match '^\w' }   # non-commented line
+    its(:content) { should match '^\w+' }   # non-commented line
   end
 end
 
@@ -35,7 +35,7 @@ control 'cis-ubuntu-14.04-3.4.3' do
   tag cis: 'ubuntu-14.04:3.4.3'
 
   describe file('/etc/hosts.deny') do
-    its(:content) { should match '^\w' }   # non-commented line
+    its(:content) { should match '^\w+' }   # non-commented line
   end
 end
 

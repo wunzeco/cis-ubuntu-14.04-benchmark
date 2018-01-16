@@ -10,9 +10,8 @@ control 'cis-ubuntu-14.04-1.5.1' do
 
   tag cis: 'ubuntu-14.04:1.5.1'
 
-  limits_d_files = command('ls /etc/security/limits.d/*.conf').stdout
-  describe command("grep 'hard core' /etc/security/limits.conf #{limits_d_files}") do
-    its(:stdout) { should match '* hard core 0' }
+  describe bash(%q(grep -P 'hard\s+core' /etc/security/limits.conf /etc/security/limits.d/*.conf)) do
+    its(:stdout) { should match %r{\*\s+hard\s+core\s+0} }
   end
 
   describe command("sysctl fs.suid_dumpable") do

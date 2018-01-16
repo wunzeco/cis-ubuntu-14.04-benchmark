@@ -70,7 +70,7 @@ control 'cis-ubuntu-14.04-4.2.1.4' do
     package('rsyslog').installed?
   end
 
-  # should match config like 
+  # should match config like
   # *.* @@loghost.example.com
   describe file('/etc/rsyslog.conf') do
     its(:content) { should match '^*.*[^I][^I]*@' }

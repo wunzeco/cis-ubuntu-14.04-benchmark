@@ -55,6 +55,6 @@ control 'cis-ubuntu-14.04-5.3.4' do
   tag cis: 'ubuntu-14.04:5.3.4'
 
   describe file('/etc/pam.d/common-password') do
-    its(:content) { should match %r{^password.*pam_unix.so.*sha513} }
+    its(:content) { should match %r{^password.*pam_unix.so.*sha512} }
   end
 end

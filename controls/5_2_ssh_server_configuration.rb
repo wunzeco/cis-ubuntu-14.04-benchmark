@@ -133,11 +133,11 @@ control 'cis-ubuntu-14.04-5.2.11' do
 
   tag cis: 'ubuntu-14.04:5.2.11'
 
-  #macs = ["hmac-sha2-512-etm@openssh.com", "hmac-sha2-256-etm@openssh.com", 
-  #        "umac-128-etm@openssh.com", "hmac-sha2-512", "hmac-sha2-256", 
+  #macs = ["hmac-sha2-512-etm@openssh.com", "hmac-sha2-256-etm@openssh.com",
+  #        "umac-128-etm@openssh.com", "hmac-sha2-512", "hmac-sha2-256",
   #        "umac-128@openssh.com" ]
 
-  describe file('/tmp/sshd_config') do
+  describe file('/etc/ssh/sshd_config') do
     # Site policy might not require all MACs specified in the list above so
     # checking for weak MAC algorithms that should not be present instead
     #its('content') { should match %r{^MACs #{macs.join(',')}} }
@@ -155,8 +155,8 @@ control 'cis-ubuntu-14.04-5.2.12' do
   tag cis: 'ubuntu-14.04:5.2.12'
 
   describe file('/etc/ssh/sshd_config') do
-    its('content') { should match %r{^ClientAliveInterval 300} }
-    its('content') { should_not match %r{^ClientAliveCountMax 0} }
+    its('content') { should match %r{^ClientAliveInterval\s+300} }
+    its('content') { should match %r{^ClientAliveCountMax\s+0} }
   end
 end
 
@@ -192,6 +192,6 @@ control 'cis-ubuntu-14.04-5.2.15' do
   tag cis: 'ubuntu-14.04:5.2.15'
 
   describe file('/etc/ssh/sshd_config') do
-    its('content') { should match %r{^(AllowUsers|AllowGroups|DenyUsers|DenyGroups) .*} }
+    its('content') { should match %r{^Banner .*} }
   end
 end
