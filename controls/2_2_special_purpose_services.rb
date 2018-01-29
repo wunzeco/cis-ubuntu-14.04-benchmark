@@ -12,11 +12,11 @@ control 'cis-ubuntu-14.04-2.2.1.1' do
 
   tag cis: 'ubuntu-14.04:2.2.1.1'
 
-  if package('chrony').installed?
+  describe.one do
     describe package('chrony') do
       it { should be_installed }
     end
-  else
+
     describe package('ntp') do
       it { should be_installed }
     end
