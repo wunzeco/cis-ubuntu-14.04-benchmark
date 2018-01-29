@@ -275,3 +275,15 @@ control 'cis-ubuntu-14.04-2.2.16' do
     its(:content) { should match 'RSYNC_ENABLE=false'}
   end
 end
+
+control 'cis-ubuntu-14.04-2.2.17' do
+  impact  1.0
+  title   '2.2.17 Ensure NIS Server is not enabled (Scored)'
+  desc    'The Network Information Service (NIS) (formally known as Yellow Pages) is a client-server directory service protocol for distributing system configuration files. The NIS server is a collection of programs that allow for the distribution of configuration files. The NIS service is inherently an insecure system that has been vulnerable to DOS attacks, buffer overflows and has poor authentication for querying NIS maps. NIS generally been replaced by such protocols as Lightweight Directory Access Protocol (LDAP). It is recommended that the service be disabled and other, more secure services be used'
+
+  tag cis: 'ubuntu-14.04:2.2.17'
+
+  describe command('initctl show-config ypserv') do
+    its(:stdout) { should_not match 'start on' }
+  end
+end
