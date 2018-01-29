@@ -104,18 +104,18 @@ control 'cis-ubuntu-14.04-1.6.2.2' do
   end
 end
 
-control 'cis-ubuntu-14.04-1.6.2.3' do
+control 'cis-ubuntu-14.04-1.6.3' do
   impact  1.0
   title   '1.6.3 Ensure SELinux or AppArmor are installed (Not Scored)'
   desc    'SELinux and AppArmor provide Mandatory Access Controls.'
 
-  tag cis: 'ubuntu-14.04:1.6.2.3'
+  tag cis: 'ubuntu-14.04:1.6.3'
 
-  if package('selinux').installed? 
+  describe.one do
     describe package('selinux') do
       it { should be_installed }
     end
-  else
+
     describe package('apparmor') do
       it { should be_installed }
     end
