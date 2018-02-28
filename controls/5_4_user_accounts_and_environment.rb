@@ -15,6 +15,11 @@ control 'cis-ubuntu-14.04-5.4.1.1' do
   describe login_defs do
     its('PASS_MAX_DAYS') { should match %r{([1-8]\d|90)$} }
   end
+
+  cmd = %q(awk -F: '($2 != "!" && $2 != "*" && $5 > 90) {print $1}' /etc/shadow)
+  describe command(cmd) do
+    its(:stdout) { should eq ''}
+  end
 end
 
 control 'cis-ubuntu-14.04-5.4.1.2' do
@@ -26,6 +31,11 @@ control 'cis-ubuntu-14.04-5.4.1.2' do
 
   describe login_defs do
     its('PASS_MIN_DAYS') { should match %r{([7-9]|[1-9]\d+)$} }
+  end
+
+  cmd = %q(awk -F: '($2 != "!" && $2 != "*" && $4 < 7) {print $1}' /etc/shadow)
+  describe command(cmd) do
+    its(:stdout) { should eq ''}
   end
 end
 
